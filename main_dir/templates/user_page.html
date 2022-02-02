@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <ul class="navbar-nav">
+                <li>
+                    <p class="navbar-brand">FakeCSV</p>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link">Schemas</p>
+                </li>
+            </ul>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav offset-md-8">
+
+                    {% if current_user.is_active %}
+                        <li class="nav-item">
+                            <p class="nav-link">Hello, <strong>{{ current_user.nickname }}</strong></p>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary" href="{{ url_for('logout') }}">LogOut</a>
+                        </li>
+
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary" href="{{ url_for('login_page') }}">LogIn</a>
+                        </li>
+                    {% endif %}
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% if current_user.is_active %}
+            <div class="bg-light p-5 rounded mt-3">
+                <h1>{{ title }}</h1>
+                <p class="lead">{{ context }}</p>
+            </div>
+            {% include 'users_list.html' %}
+        {% else %}
+            <div class="bg-light p-5 rounded mt-3">
+                <h1>You must be registered!!</h1>
+            </div>
+        {% endif %}
+
+    </main>
+
+
+{% endblock %}

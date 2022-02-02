@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registration Page
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Registration Page</h1>
+
+        <form method="post" class="needs-validation">
+            <div class="row g-3">
+
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">First name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="name" name="first_name"
+                           required="">
+                    <div class="invalid-feedback">
+                        Valid first name is required.
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="surname" name="last_name"
+                           required="">
+                    <div class="invalid-feedback">
+                        Valid last name is required.
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="Age" placeholder="age" name="age">
+                    <div class="invalid-feedback">
+                        Valid last name is required.
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="nickname" class="form-label">Username</label>
+
+                    <input type="text" class="form-control" name="nickname" placeholder="nickname" required="">
+
+                    <div class="invalid-feedback">
+                        Your username is required.
+                    </div>
+
+                </div>
+
+                <div class="col-12">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com"
+                           required="">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="address" class="form-label">About yourself <span
+                            class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" id="address" name="description" placeholder="description">
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="address2" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="password"
+                           required="">
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="address2" class="form-label">Password*</label>
+                    <input type="password" class="form-control" id="password2" name="password2"
+                           placeholder="confirm password" required="">
+                </div>
+
+            </div>
+            <hr class="my-4">
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+
+            <p class="mt-4 col-12 text-center">If you have an account <a href="{{ url_for('login_page') }}">follow this
+                link</a>
+                to register.</p>
+
+            <hr class="my-4">
+        </form>
+    </div>
+{% endblock %}
