@@ -4,7 +4,9 @@ from flask_login import LoginManager
 
 
 app = Flask(__name__)
-app.secret_key = 'resurrection'
+app.secret_key = 'resurrectionov5j4j9mb8e57b78'
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:1401@127.0.0.1:8000/work_project"
 db = SQLAlchemy(app)
 manager = LoginManager(app)

@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, render_template, url_for, request, flash, redirect
+from flask import Flask, render_template, url_for, request, flash, redirect, session, abort, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user
 
@@ -10,24 +10,29 @@ from web_site.main_dir.db_models import Users
 
 @app.route('/', methods=['GET', 'POST'])
 def login_page():
-    nickname = request.form.get('nickname')
-    password = request.form.get('password')
+    if 'userLogged' in session:
+        print('Hello')
+        return redirect(url_for('user_page', u_id=session['userLogged']))
 
-    if request.method == 'POST':
+    elif request.method == 'POST':
+        nickname = request.form.get('nickname')
+        password = request.form.get('password')
 
         if nickname and password:
             user = db.session.query(Users).filter(Users.nickname == nickname).first()
 
             if user and check_password_hash(user.password, password):
+
+                session['userLogged'] = user.id
                 login_user(user)
 
-                return redirect(url_for('user_page', u_id=user.id))
+                return redirect(url_for('user_page', u_id=session['userLogged']))
             else:
                 flash('Login or Password is not correct!')
         else:
             flash('Please fill Login and Password fields!')
 
-    return render_template('login.html')
+    return render_template('login.html', title='Login Page')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -64,21 +69,46 @@ def register_page():
 
             return redirect(url_for('login_page'))
 
-    return render_template('register.html')
+    return render_template('register.html', title='User Registration')
+
+
+# Соединение с БД, если еще не установлено
+# def get_data_db():
+#     if not hasattr(g, 'link_db'):
+#         g.link_db = db
+#     return g.link_db
+
+
+# Закрываем соединение с БД
+# @app.teardown_appcontext
+# def close_db(error):
+#     if hasattr(g, 'link_db'):
+#         g.link_db.close()
 
 
 @app.route(f'/user/<int:u_id>')
 def user_page(u_id):
-    logged_user = db.session.query(Users).filter(Users.id == u_id).first()
-    content = dict(
-        title='User page',
-        context=f'Welcome back user {logged_user.nickname.upper()}',
-        users=db.session.query(Users).all()
-    )
-    return render_template('user_page.html', **content)
+    if 'userLogged' not in session or session['userLogged'] != u_id:
+        abort(401)
+    else:
+        logged_user = db.session.query(Users).filter(Users.id == u_id).first()
+        # base = get_data_db()
+        print(db.session.session_factory)
+        content = dict(
+            title='User page',
+            context=f'Welcome back user {logged_user.nickname.upper()}',
+            users=db.session.query(Users).all()
+        )
+        return render_template('user_page.html', **content)
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_404.html', title='Page not found')
 
 
 @app.route('/logout')
 def logout():
     logout_user()
+    session.pop('userLogged')
     return redirect(url_for('login_page'))
