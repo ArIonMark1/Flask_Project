@@ -150,7 +150,7 @@ def delete_user(user_id, control=None):
         if control == 'True':
             victim_user.delete()
             db.session.commit()
-            return redirect(url_for('user_work_page', u_id=current_user.id))
+            return redirect(url_for('login_page'))
 
         return redirect((url_for('user_page', user_id=user_id)))
 
