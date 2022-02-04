@@ -19,7 +19,7 @@ class Users(db.Model, UserMixin):
     is_admin = db.Column(db.Boolean(), default=False)
     last_login = db.Column(db.DateTime())
 
-    def __init__(self, first_name, last_name, age, nickname, password, email, description, last_login):
+    def __init__(self, first_name, last_name, age, nickname, password, email, description, is_admin):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
@@ -27,11 +27,11 @@ class Users(db.Model, UserMixin):
         self.password = password
         self.email = email
         self.description = description
-        self.is_admin = False
-        self.last_login = last_login
+        self.is_admin = is_admin
+        self.last_login = datetime.datetime.now()
 
     def __repr__(self):
-        return f'{self.id}: {self.nickname}'
+        return f'{self.id}: {self.nickname}, is_admin: {self.is_admin}'
 
 
 @manager.user_loader

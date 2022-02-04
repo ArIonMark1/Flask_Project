@@ -8,43 +8,36 @@
     <div class="container col-md-4 mt-4">
         <body class="text-center">
 
-            <main class="form-signin">
+        <main class="form-signin">
 
-                <form method="post">
-                <img class="mb-4" src="static/css/smile.png" alt="emblem">
+            <form method="post">
+                <img class="mb-4" src="static/images/smile.png" alt="emblem">
                 <h1 class="h2 mb-3 fw-normal">Please sign in</h1>
 
                 <div class="form-floating">
-                    <input type="text" name="nickname" class="form-control" id="floatingInput" placeholder="nickname"
+                    <input type="text" name="nickname" class="form-control" id="Nickname" placeholder="nickname"
                            data-nlok-ref-guid="bf11fbee-ec81-4720-9af6-349db035b379">
-                    <div id="norton-idsafe-field-styling-divId"
-                         style="height:42.18181818181818px;max-width:42.18181818181818px;vertical-align:top; position:absolute; top:7.90909090909091px;left:248.1407624633431px;cursor:pointer;resize: both;z-index:2147483646;">
-                        <img id="norton-idsafe-field-logo-imgId"
-                             src="chrome-extension://admmjipmmciaobhojoghlmleefbicajg/content/images/ic-field-logo.svg"
-                             style="height:42.18181818181818px; max-width:42.18181818181818px;"></div>
-                    <label for="floatingInput">Enter Nickname</label>
+
+                    <label for="Nickname">Enter Nickname</label>
                 </div>
 
                 <div class="form-floating">
                     <input type="password" name="password" class="form-control" id="Password" placeholder="Password"
                            data-nlok-ref-guid="e13221c2-8f6a-4a75-c024-62faa793f81c">
-                    <div id="norton-idsafe-field-styling-divId"
-                         style="height:42.18181818181818px;max-width:42.18181818181818px;vertical-align:top; position:absolute; top:7.90909090909091px;left:248.1407624633431px;cursor:pointer;resize: both;z-index:2147483646;">
-                        <img id="norton-idsafe-field-logo-imgId"
-                             src="chrome-extension://admmjipmmciaobhojoghlmleefbicajg/content/images/ic-field-logo.svg"
-                             style="height:42.18181818181818px; max-width:42.18181818181818px;"></div>
-                    <label for="floatingPassword">Password</label>
+
+                    <label for="Password">Password</label>
                 </div>
 
-                <p class="mt-2">If you don`t have an account <a href="{{ url_for('register_page') }}">follow this link</a> to register.</p>
+                <p class="mt-2">If you don`t have an account <a href="{{ url_for('register_page') }}">follow this
+                    link</a> to register.</p>
 
                 <button class="w-100 btn btn-lg btn-primary mt-3" type="submit"
                         data-nlok-ref-guid="91b23138-ad58-426a-a25a-b6c47f940803">Sign in
                 </button>
-                    <p class="mt-5 mb-3 text-muted">© 2020–2022</p>
+                <p class="mt-5 mb-3 text-muted">© 2020–2022</p>
 
             </form>
-            </main>
+        </main>
 
         </body>
     </div>
