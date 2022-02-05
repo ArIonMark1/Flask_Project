@@ -1,5 +1,7 @@
 from flask import Flask, render_template, url_for, request, flash, redirect
 from flask_migrate import Migrate
+from werkzeug.security import generate_password_hash
+# from web_site.main_dir.db_models import Users
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
@@ -15,6 +17,7 @@ migrate = Migrate(app, db)
 manager = LoginManager(app)
 
 from web_site.main_dir import db_models, mappings
+
 db.create_all()
 # db.drop_all()
 

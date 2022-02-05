@@ -50,12 +50,18 @@
                     <div class="form-group col-md-2">
                         <label for="IsAdmin">Is Admin</label>
 
-                        <select class="form-select form-select mb-2" name="is_admin" id="IsAdmin"
-                                aria-label=".form-select example">
-                            <option selected>{{ user.is_admin }}</option>
-                            <option value="{{ True }}">True</option>
-                            <option value="{{ False }}">False</option>
-                        </select>
+                        {% if current_user.is_admin %}
+                            <select class="form-select form-select mb-2" name="is_admin" id="IsAdmin"
+                                    aria-label=".form-select example">
+
+                                <option selected style="font-style: italic">{{ user.is_admin }}</option>
+                                <option value="{{ True }}">True</option>
+                                <option value="{{ False }}">False</option>
+                            </select>
+                        {% else %}
+                            <input type="text" name="email" class="form-control" id="Email" disabled
+                                   value="{{ user.is_admin }}">
+                        {% endif %}
                     </div>
 
                     <div class="form-group col-md-2">
@@ -79,7 +85,8 @@
                 <button type="submit" class="w-25 btn btn-primary mt-3">Confirm</button>
 
                 <button type="submit" class="w-25 btn btn-danger mt-3"
-                        ><a href="{{ url_for('delete_user', user_id=user.id) }} " class="link-light text-decoration-none">Delete</a>
+                ><a href="{{ url_for('delete_user', user_id=user.id) }} "
+                    class="link-light text-decoration-none">Delete</a>
                 </button>
 
             </form>

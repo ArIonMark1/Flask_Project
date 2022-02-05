@@ -6,6 +6,7 @@ from web_site.main_dir import db, manager
 
 
 # *********************************************
+
 class Users(db.Model, UserMixin):
     __tablename__ = 'user'
     id = db.Column(db.Integer(), primary_key=True)
@@ -19,19 +20,19 @@ class Users(db.Model, UserMixin):
     is_admin = db.Column(db.Boolean(), default=False)
     last_login = db.Column(db.DateTime())
 
-    def __init__(self, first_name, last_name, age, nickname, password, email, description, is_admin):
+    def __init__(self, first_name, last_name, age, nickname, password, email, is_admin, description=None):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
         self.nickname = nickname
         self.password = password
         self.email = email
-        self.description = description
+        self.description = description  # описание пользователя по дефолту пустое, но в процессе работы на сайте можно добавить или редактировать
         self.is_admin = is_admin
         self.last_login = datetime.datetime.now()
 
     def __repr__(self):
-        return f'{self.id}: {self.nickname}, is_admin: {self.is_admin}'
+        return f'{self.id}: {self.nickname}'
 
 
 @manager.user_loader

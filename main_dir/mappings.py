@@ -4,12 +4,28 @@ from flask import Flask, render_template, url_for, request, flash, redirect, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from web_site.main_dir import app, db
+from web_site.main_dir import app, db, migrate
 from web_site.main_dir.db_models import Users
+from web_site.main_dir import create_superuser
+
+
+if not db.session.query(Users).all():
+    """ Автоматическое создание админ-странички для разработчика """
+    # в процессе нужно подключить Seed базы !!!!
+    admin = create_superuser.admin()
+    print('Created Superuser: nick: "admin", pass: "admin"')
+    db.session.add(admin)
+    db.session.commit()
+elif db.session.query(Users).count() > 1:
+
+    pass
+    # db.session.query(Users).delete()
+    # db.session.commit()
 
 
 @app.route('/', methods=['GET', 'POST'])
 def login_page():
+    """ Страница входа зарегистрированного пользователя """
     if current_user.is_authenticated:
 
         return redirect(url_for('user_work_page', u_id=current_user.id))
@@ -22,8 +38,9 @@ def login_page():
             user = db.session.query(Users).filter(Users.nickname == nickname).first()
 
             if user and check_password_hash(user.password, password):
+                # Передаем подтвержденного пользователя в логин-менеджер
                 login_user(user)
-
+                # Записываем время входа в систему
                 user.last_login = datetime.datetime.now()
                 db.session.add(user)
                 db.session.commit()
@@ -73,8 +90,9 @@ def register_page():
             db.session.commit()
 
             flash('Registration completed successfully')
+            """ После успешной регистрации перенаправляет нового пользователя на страницу входа """
             return redirect(url_for('login_page'))
-
+    # рендеринг страницы регистрации
     return render_template('register.html', title='User Registration')
 
 
@@ -94,14 +112,20 @@ def user_page(user_id):
             user.nickname = request.form['nickname']
             user.email = request.form['email']
             user.description = request.form['description']
-            if request.form['is_admin'] == 'True':
+            # обработка поля админа,  если текущий пользователь админ - может редактировать поле, иначе просто отображение статуса
+            if current_user.is_admin and request.form['is_admin'] == 'True':
+
+                print(request.form['is_admin'])
                 user.is_admin = True
+            else:
+                user.is_admin = False
 
             db.session.add(user)
             db.session.commit()
-
+            # После завершения редактирования пользователя, перенаправляет в кабинет пользователя
             return redirect(url_for('user_work_page', u_id=current_user.id))
         else:
+            # При GET запросе отображает страницу с данными выбранного пользователя
             content = dict(
                 title=f'{user.nickname.upper()} page',
                 context=f'{user.nickname.upper()} user edit page ',
@@ -110,13 +134,14 @@ def user_page(user_id):
             return render_template('current_user_page.html', **content)
 
     else:
+        # В случае если id запрашиваемого пользователя нету в базе - возвращает страницу-ошибку: страница не найдена
         abort(404)
 
 
 @app.route(f'/user/<int:u_id>')
 @login_required
 def user_work_page(u_id):
-    """Рабочая страница зарегистрированого пользователя, список всех пользователей """
+    """Рабочая страница, кабинет зарегистрированного пользователя, список всех пользователей """
 
     if '_user_id' not in session or int(session['_user_id']) != u_id:
         """ Проверка на активность пользователя, залогинен ли пользователь в системе """
@@ -146,8 +171,10 @@ def delete_user(user_id, control=None):
         return render_template('user_confirm_delete.html', user=user)
         # ###########################################################
     elif victim_user.count() and control:
-
+        # Обработка варриантов выбора пользователя
         if control == 'True':
+            # Если пользователь подтвердил удаление перенаправляем его на страничку входа
+            # во избежания ошибки, если пользователь удалил самого себя
             victim_user.delete()
             db.session.commit()
             return redirect(url_for('login_page'))
