@@ -25,7 +25,7 @@
                     {% if current_user.is_admin %}
                         {% for user in users %}
                             <tr>
-                                <td><a href="{{ url_for('user_page', user_id=user.id) }}" style="color: dodgerblue">
+                                <td><a class="text-info"  href="{{ url_for('user_page', user_id=user.id) }}">
                                     {{ user.nickname }}</a></td>
                                 <td>{{ user.first_name }}</td>
                                 <td>{{ user.last_name }}</td>
@@ -42,8 +42,8 @@
                         {% for user in users %}
                             <tr>
                                 {% if current_user.nickname == user.nickname %}
-                                    <td><a href="{{ url_for('user_page', user_id=user.id) }}"
-                                           style="color: dodgerblue">{{ user.nickname }}</a></td>
+                                    <td><a class="text text-info" href="{{ url_for('user_page', user_id=user.id) }}"
+                                           >{{ user.nickname }}</a></td>
                                 {% else %}
                                     <td>{{ user.nickname }}</td>
                                 {% endif %}

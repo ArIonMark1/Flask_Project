@@ -4,22 +4,23 @@ from flask import Flask, render_template, url_for, request, flash, redirect, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from web_site.main_dir import app, db, migrate
-from web_site.main_dir.db_models import Users
-from web_site.main_dir import create_superuser
+from web_site.app.app import app, db, migrate
+from web_site.app.db_models import User
+from web_site.app import create_superuser
 
 
-if not db.session.query(Users).all():
+if not db.session.query(User).all():
     """ Автоматическое создание админ-странички для разработчика """
     # в процессе нужно подключить Seed базы !!!!
     admin = create_superuser.admin()
     print('Created Superuser: nick: "admin", pass: "admin"')
     db.session.add(admin)
     db.session.commit()
-elif db.session.query(Users).count() > 1:
 
-    pass
-    # db.session.query(Users).delete()
+elif db.session.query(User).count():
+    print(db.session.query(User).first())
+    #
+    # db.session.query(User).delete()
     # db.session.commit()
 
 
@@ -35,7 +36,7 @@ def login_page():
         password = request.form.get('password')
 
         if nickname and password:
-            user = db.session.query(Users).filter(Users.nickname == nickname).first()
+            user = db.session.query(User).filter(User.nickname == nickname).first()
 
             if user and check_password_hash(user.password, password):
                 # Передаем подтвержденного пользователя в логин-менеджер
@@ -47,9 +48,9 @@ def login_page():
 
                 return redirect(url_for('user_work_page', u_id=user.id))
             else:
-                flash('Login or Password is not correct!')
+                flash('Login or Password is not correct.')
         else:
-            flash('Please fill Login and Password fields!')
+            flash('Please fill Login and Password fields.')
 
     return render_template('login.html', title='Login Page')
 
@@ -69,14 +70,14 @@ def register_page():
     if request.method == 'POST':
 
         if not (nickname or password or password2 or email):
-            flash('Please fill all fields!!')
+            flash('Please fill all fields.')
         elif password != password2:
-            flash('Passwords  are not equal!!')
-        elif email and db.session.query(Users).filter(Users.email == email).first():
-            flash('Wrong Email address, try again!!')
+            flash('Passwords  are not equal.')
+        elif email and db.session.query(User).filter(User.email == email).first():
+            flash('Wrong Email address, try again.')
         else:
             hash_key = generate_password_hash(password)
-            new_user = Users(
+            new_user = User(
                 first_name=first_name,
                 last_name=last_name,
                 age=age,
@@ -100,7 +101,7 @@ def register_page():
 @login_required
 def user_page(user_id):
     """ Страница редактирования пользователя """
-    selected_user = db.session.query(Users).filter(Users.id == user_id)
+    selected_user = db.session.query(User).filter(User.id == user_id)
     if selected_user.count():
         user = selected_user.first()
 
@@ -148,12 +149,12 @@ def user_work_page(u_id):
         abort(404)
 
     else:
-        logged_user = db.session.query(Users).filter(Users.id == u_id).first()
+        logged_user = db.session.query(User).filter(User.id == u_id).first()
 
         content = dict(
             title='User work page',
             context=f'Welcome back user {logged_user.nickname.upper()}',
-            users=db.session.query(Users).all()
+            users=db.session.query(User).all()
 
         )
         return render_template('user_work_page.html', **content)
@@ -164,7 +165,7 @@ def user_work_page(u_id):
 def delete_user(user_id, control=None):
     """ Удаление пользователя """
     print(user_id)
-    victim_user = db.session.query(Users).filter(Users.id == user_id)
+    victim_user = db.session.query(User).filter(User.id == user_id)
 
     if victim_user.count() and not control:  # Страница подтверждения удаления
         user = victim_user.first()

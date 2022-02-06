@@ -1,14 +1,14 @@
 import datetime
 
-from flask_login import UserMixin, login_manager
+from flask_login import UserMixin
 
-from web_site.main_dir import db, manager
+from web_site.app.app import db, manager
 
 
 # *********************************************
 
-class Users(db.Model, UserMixin):
-    __tablename__ = 'user'
+class User(db.Model, UserMixin):
+    __tablename__ = 'users'
     id = db.Column(db.Integer(), primary_key=True)
     first_name = db.Column(db.String(50))
     last_name = db.Column(db.String(50))
@@ -20,7 +20,11 @@ class Users(db.Model, UserMixin):
     is_admin = db.Column(db.Boolean(), default=False)
     last_login = db.Column(db.DateTime())
 
-    def __init__(self, first_name, last_name, age, nickname, password, email, is_admin, description=None):
+    def __repr__(self):
+        return f'{self.__class__.__name__} : {self.nickname}'
+
+    def __init__(self, nickname, email, password, is_admin, first_name=None, last_name=None, age=None,
+                 description=None):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
@@ -31,10 +35,7 @@ class Users(db.Model, UserMixin):
         self.is_admin = is_admin
         self.last_login = datetime.datetime.now()
 
-    def __repr__(self):
-        return f'{self.id}: {self.nickname}'
-
 
 @manager.user_loader
 def load_user(user_id):
-    return Users.query.get(user_id)
+    return User.query.get(user_id)

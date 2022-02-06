@@ -1,16 +1,18 @@
 from werkzeug.security import generate_password_hash
 
-from web_site.main_dir.db_models import Users
+from web_site.app.db_models import User
 
 
 def admin():
-    admin = Users(
-        first_name=None,
-        last_name=None,
+    site_admin = User(
         age=100,
         nickname='admin',
         password=generate_password_hash('admin'),
         email='admin@gmail.com',
         is_admin=True,
     )
-    return admin
+
+    return site_admin
+
+
+
