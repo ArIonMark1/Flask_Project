@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container col-md-4 mt-4">
+        <body class="text-center">
+
+        <main class="form-signin">
+
+            <form method="post">
+                <img class="mb-4" src="static/images/smile.png" alt="emblem">
+                <h1 class="h2 mb-3 fw-normal">Please sign in</h1>
+
+                <div class="form-floating">
+                    <input type="text" name="nickname" class="form-control" id="Nickname" placeholder="nickname"
+                           data-nlok-ref-guid="bf11fbee-ec81-4720-9af6-349db035b379">
+
+                    <label for="Nickname">Enter Nickname</label>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" name="password" class="form-control" id="Password" placeholder="Password"
+                           data-nlok-ref-guid="e13221c2-8f6a-4a75-c024-62faa793f81c">
+
+                    <label for="Password">Password</label>
+                </div>
+
+                <p class="mt-2">If you don`t have an account <a href="{{ url_for('register_page') }}">follow this
+                    link</a> to register.</p>
+
+                <button class="w-100 btn btn-lg btn-primary mt-3" type="submit"
+                        data-nlok-ref-guid="91b23138-ad58-426a-a25a-b6c47f940803">Sign in
+                </button>
+                <p class="mt-5 mb-3 text-muted">© 2020–2022</p>
+
+            </form>
+        </main>
+
+        </body>
+    </div>
+
+{% endblock %}

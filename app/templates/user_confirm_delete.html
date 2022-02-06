@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block style %}{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <div class="container category_delete">
+        <div class="h1">Уверены, что хотите удалить?</div>
+        <br>
+        {#        ===================================================================#}
+
+        <table class="table table-striped h4">
+            <tbody>
+            <tr>
+                <th scope="row">User Name</th>
+                <td>{{ user.nickname }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        {#======================================================#}
+        <div class="container">
+            <div class="form-row text-center">
+
+                <button type="submit" class="col-2 btn btn-danger"
+                        ><a href="{{ url_for('delete_user', user_id=user.id, control=True) }} " class="link-light text-decoration-none">Удалить</a>
+                </button>
+                <button type="submit" class="col-2 btn btn-success"
+                        ><a href="{{ url_for('delete_user', user_id=user.id, control=False) }} " class="link-light text-decoration-none">Отмена</a>
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

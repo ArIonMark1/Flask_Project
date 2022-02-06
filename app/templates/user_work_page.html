@@ -11,10 +11,10 @@
 
             <ul class="navbar-nav">
                 <li>
-                    <p class="navbar-brand">FakeCSV</p>
+                    <p class="navbar-brand">FabriCSV</p>
                 </li>
                 <li class="nav-item">
-                    <p class="nav-link">Schemas</p>
+                    <p class="nav-link">Список пользователей</p>
                 </li>
             </ul>
 
@@ -37,17 +37,17 @@
                         </li>
                     {% endif %}
 
-
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main class="container">
+    <main>
         {% if current_user.is_active %}
             <div class="bg-light p-5 rounded mt-3">
                 <h1>{{ title }}</h1>
                 <p class="lead">{{ context }}</p>
+{#            <p>{{ current_user.nickname }}</p>#}
             </div>
             {% include 'users_list.html' %}
         {% else %}
