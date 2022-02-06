@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash
 
-from web_site.app.db_models import User
+from Flask_Project.app.db_models import User
 
 
 def admin():
@@ -13,6 +13,3 @@ def admin():
     )
 
     return site_admin
-
-
-

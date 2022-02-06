@@ -1,0 +1,13 @@
+sudo -i -u postgres -- созданая по умолчанию учетная запись, переходим к ней
+psql -- получаем доступ к командной строке Postgres
+createuser --interactive -- создание нового пользователя через консоль Postgres
+createdb name_db -- создаем новую базу данных
+sudo -u username psql -- подключаемся к базе данных через нового пользователя
+psgl -d name_db -- выбираем нужную, уже созданую, базу данных
+\conninfo - проверяем данные о текущем подключении
+
+CREATE DATABASE work_project; (create database work_project;)
+\c work_project
+SELECT * FROM user;
+
+

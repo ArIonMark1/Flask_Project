@@ -4,15 +4,15 @@ from flask import Flask, render_template, url_for, request, flash, redirect, ses
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from web_site.app.app import app, db, migrate
-from web_site.app.db_models import User
-from web_site.app import create_superuser
+from Flask_Project.app.app import app, db, migrate
+from Flask_Project.app.db_models import User
 
+from Flask_Project.app.create_superuser import admin
 
 if not db.session.query(User).all():
     """ Автоматическое создание админ-странички для разработчика """
     # в процессе нужно подключить Seed базы !!!!
-    admin = create_superuser.admin()
+    admin = admin()
     print('Created Superuser: nick: "admin", pass: "admin"')
     db.session.add(admin)
     db.session.commit()

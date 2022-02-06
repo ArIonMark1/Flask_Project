@@ -25,7 +25,8 @@ manager = LoginManager(app)
 seeder = FlaskSeeder()
 seeder.init_app(app, db)
 
-from web_site.app import db_models, mappings
+from Flask_Project.app import mappings
+from Flask_Project.app import db_models
 
 db.create_all()
 # db.drop_all()
