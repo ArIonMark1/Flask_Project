@@ -1,4 +1,7 @@
 import datetime
+import json
+import os.path
+from pathlib import Path
 
 from flask import Flask, render_template, url_for, request, flash, redirect, session, abort, g
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,23 +9,44 @@ from flask_login import login_user, logout_user, login_required, current_user
 
 from Flask_Project.app.app import app, db, migrate
 from Flask_Project.app.db_models import User
+from Flask_Project.app.data_insertion import FillBase
 
-from Flask_Project.app.create_superuser import admin
+app_dir = Path(__file__).parent
+json_path = os.path.join(app_dir, 'seeds/data_db.json')
 
+# -----------------------------------------------
 if not db.session.query(User).all():
     """ Автоматическое создание админ-странички для разработчика """
-    # в процессе нужно подключить Seed базы !!!!
-    admin = admin()
-    print('Created Superuser: nick: "admin", pass: "admin"')
+    admin_data = {
+        'age': 100,
+        'nickname': 'admin',
+        'password': generate_password_hash('admin'),
+        'email': 'admin@gmail.com',
+        'is_admin': True,
+    }
+    admin = FillBase(User, admin_data)
+    admin.append()
     db.session.add(admin)
     db.session.commit()
 
-elif db.session.query(User).count():
-    print(db.session.query(User).first())
-    #
-    # db.session.query(User).delete()
-    # db.session.commit()
+    print(f'Created Superuser: nick: "admin", pass: "admin"')
 
+elif db.session.query(User).count():
+
+    def load_json_data():
+        with open(json_path, encoding='utf-8') as j_file:
+            return json.load(j_file)
+
+
+    for user_data in load_json_data():
+        create_user = FillBase(User, user_data)
+        create_user.append()
+        db.session.add(create_user)
+
+    db.session.commit()
+
+
+# -----------------------------------------------
 
 @app.route('/', methods=['GET', 'POST'])
 def login_page():

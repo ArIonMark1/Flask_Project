@@ -1,0 +1,152 @@
+[
+  {
+    "age": 29,
+    "description": "Фонарик падаль инфекция горький чем инвалид подробность. Нажать палата сутки непривычный.\nОтметить вообще школьный коммунизм. Висеть ленинград интернет потянуться поймать спешить.",
+    "email": "taisija1984@example.org",
+    "first_name": "Стоян",
+    "is_admin": false,
+    "last_name": "Артемьева",
+    "nickname": "nikitindanila",
+    "password": "pbkdf2:sha256:260000$QQGAMimftVLoL4Mr$40597718f27c9a6fce40be31c35747c16ca940a3b3bcdcaebd81877f9d1aaac3"
+  },
+  {
+    "age": 87,
+    "description": "Ручей блин валюта провинция.\nКоричневый носок легко самостоятельно написать нажать четко скрытый. Кузнец табак зато спичка полоска.",
+    "email": "innokentikozlov@example.net",
+    "first_name": "Родион",
+    "is_admin": false,
+    "last_name": "Соловьев",
+    "nickname": "evdokimovanonna",
+    "password": "pbkdf2:sha256:260000$SCmOdEwZZGNjO9yB$30dda5033237368a114546853460a82d2a11bd1a34fe298fa9ef74d6d06fd02d"
+  },
+  {
+    "age": 70,
+    "description": "Сынок хозяйка головной головка спалить. Отдел чувство основание дьявол строительство адвокат. Возможно мотоцикл господь трясти мера умолять.",
+    "email": "ufedorova@example.net",
+    "first_name": "Акулина",
+    "is_admin": false,
+    "last_name": "Дроздова",
+    "nickname": "andronik1995",
+    "password": "pbkdf2:sha256:260000$1oCHbQ3R4WB12U2E$a4263b8d48dc4d890809b32fe4137327643b9c8a81ecc11b42199026ddc68633"
+  },
+  {
+    "age": 25,
+    "description": "Кожа инструкция самостоятельно за. Стакан выбирать пропадать выраженный построить сутки выражение. Поговорить ведь потрясти трубка. Скользить выдержать дошлый металл остановить.",
+    "email": "nekrasovaoksana@example.net",
+    "first_name": "Остап",
+    "is_admin": false,
+    "last_name": "Матвеева",
+    "nickname": "platon61",
+    "password": "pbkdf2:sha256:260000$ub00NWqE05qiPAEG$6b54757c6f4d64043e1df9b8a1e16bb6db09d2dcd89a533f6c79ac2a9a2a9f3d"
+  },
+  {
+    "age": 33,
+    "description": "Кидать термин угодный жестокий. Господь потом единый зеленый остановить. Бегать плавно механический.",
+    "email": "polikarp1970@example.com",
+    "first_name": "Эмиль",
+    "is_admin": false,
+    "last_name": "Захарова",
+    "nickname": "tretjakovvlas",
+    "password": "pbkdf2:sha256:260000$TJWFgrV18FGg3agC$04347c57e944cdb3eb1ec86620663104380d563b65b1f11a710188cd23f40a6b"
+  },
+  {
+    "age": 36,
+    "description": "Настать июнь около сопровождаться четко костер. Покидать дошлый другой зато. Полюбить казнь пропасть бабочка правый привлекать.",
+    "email": "andrezaharov@example.org",
+    "first_name": "Виктор",
+    "is_admin": false,
+    "last_name": "Емельянов",
+    "nickname": "seliverst77",
+    "password": "pbkdf2:sha256:260000$yYJyNYbpxfNTMhNT$cbc8b0b14f40451952e068a68105530974203b43d7f189956943479c3264697c"
+  },
+  {
+    "age": 57,
+    "description": "Бегать сутки полностью обида. Степь ставить написать лапа лапа неправда. Возможно плясать картинка некоторый кольцо ломать способ дьявол.",
+    "email": "naumovalarisa@example.org",
+    "first_name": "Тимур",
+    "is_admin": false,
+    "last_name": "Колесникова",
+    "nickname": "grigorevefrem",
+    "password": "pbkdf2:sha256:260000$KRrQmxf6y5IAg5Ro$53fffbdff0a5fd79d3e842ff68cfd28aed1c4e076e774192d5c9da2f8e968433"
+  },
+  {
+    "age": 53,
+    "description": "Зарплата успокоиться тяжелый школьный. Развернуться июнь плод. Стакан манера покинуть школьный бегать.\nОдин рис неожиданный ремень невыносимый направо.",
+    "email": "xpopova@example.net",
+    "first_name": "Эмиль",
+    "is_admin": false,
+    "last_name": "Селезнев",
+    "nickname": "nifont77",
+    "password": "pbkdf2:sha256:260000$CnwzGMoANdO6f7OI$41ee60887d2f0809a7f8b9ae3eef18cf0dfd2c3715e2dec8389dbb7f66b66f40"
+  },
+  {
+    "age": 45,
+    "description": "Сверкающий точно жестокий. Чувство приятель выдержать способ задержать. Деловой наслаждение роскошный горький написать.",
+    "email": "ershovaantonina@example.com",
+    "first_name": "Азарий",
+    "is_admin": false,
+    "last_name": "Егорова",
+    "nickname": "venedikt_37",
+    "password": "pbkdf2:sha256:260000$SScxiFAhAenliWSb$9e8aaebc9f6b6421663aa65924b6c7cb4a97d6697ded8004b1bc1a85f588fbfd"
+  },
+  {
+    "age": 23,
+    "description": "Роскошный ребятишки угроза еврейский постоянный головка наслаждение. Построить крутой задержать степь основание бок. Скрытый торопливый совещание умирать космос.",
+    "email": "samuil_1985@example.net",
+    "first_name": "Твердислав",
+    "is_admin": false,
+    "last_name": "Князева",
+    "nickname": "anikita2010",
+    "password": "pbkdf2:sha256:260000$qTbiu4Sm2T6IXmt1$1991d8cf55c00a692af07955b9398d15ec4382f5dd2e1976185b31c7e88ce2d5"
+  },
+  {
+    "age": 49,
+    "description": "Плясать демократия пасть господь присесть ботинок. Падать советовать механический указанный ход. Неожиданно промолчать собеседник беспомощный миф заплакать поймать.",
+    "email": "ovchinnikovstanimir@example.org",
+    "first_name": "Роман",
+    "is_admin": false,
+    "last_name": "Савин",
+    "nickname": "harlampi57",
+    "password": "pbkdf2:sha256:260000$F3I1zPS1NB6ylv7p$8ed6e84be96262a651f96db6d6329438186ec62545dee021b2442054043c121f"
+  },
+  {
+    "age": 48,
+    "description": "Эффект угол порода неожиданно витрина реклама. Горький грудь коллектив монета. Исследование недостаток валюта миг заработать грустный вытаскивать.",
+    "email": "mironovgerasim@example.net",
+    "first_name": "Иванна",
+    "is_admin": false,
+    "last_name": "Блохин",
+    "nickname": "shashkovmoise",
+    "password": "pbkdf2:sha256:260000$YIwV64e44uDot839$a20279e01ffbacb11be99e359efd0f1a0f6d7dfa48d15f5df523f4b90d022acc"
+  },
+  {
+    "age": 85,
+    "description": "Еврейский жестокий спешить дурацкий. Опасность спорт инструкция ремень подземный ложиться изба упорно. Строительство покидать болото набор мягкий плод счастье.",
+    "email": "bojanmorozov@example.com",
+    "first_name": "Милица",
+    "is_admin": false,
+    "last_name": "Андреева",
+    "nickname": "leon09",
+    "password": "pbkdf2:sha256:260000$ruI5z5RKgh7XxgVn$46830f4de4bd780b893c7d83145942ceabfc6e32586c3d00ef4e5d90ee29d3e2"
+  },
+  {
+    "age": 40,
+    "description": "Аллея коллектив экзамен около. Покинуть девка да порода рис.\nЮный тюрьма еврейский дурацкий умолять. Умирать зарплата тревога другой покидать успокоиться.",
+    "email": "milovan_73@example.net",
+    "first_name": "Елена",
+    "is_admin": false,
+    "last_name": "Кудрявцев",
+    "nickname": "knjazevanatoli",
+    "password": "pbkdf2:sha256:260000$yMu0TocN0JWbMaMH$e89e274cf094cb4dbeff7a4b40c4cef62800c8127bf254a790f455f06d4edddf"
+  },
+  {
+    "age": 58,
+    "description": "Слишком лапа спасть кузнец кузнец вытаскивать. Поставить страсть полевой заведение. Желание правление необычный рассуждение.",
+    "email": "xsaveleva@example.com",
+    "first_name": "Радован",
+    "is_admin": false,
+    "last_name": "Баранова",
+    "nickname": "rogovantonin",
+    "password": "pbkdf2:sha256:260000$qdy9KMLXKC6Z6sMt$82b2d8f3efc52cb47bafcf1c5405e7c60708d8b5d8e1d1e2f1d3a370736157e8"
+  }
+]

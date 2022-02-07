@@ -3,14 +3,7 @@ import datetime
 from flask_login import UserMixin
 from Flask_Project.app.app import db, manager
 
-"""
-.. 
-dialect:: postgresql+psycopg2
-    :name: psycopg2
-    :dbapi: psycopg2
-    :connectstring: postgresql+psycopg2://user:password@host:port/dbname[?key=value&key=value...]
-    :url: https://pypi.org/project/psycopg2/
-"""
+
 # *********************************************
 
 class User(db.Model, UserMixin):
