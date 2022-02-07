@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
         return f'{self.__class__.__name__} : {self.nickname}'
 
     def __init__(self, nickname, email, password, is_admin, first_name=None, last_name=None, age=None,
-                 description=None):
+                 description=None, last_login=None):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
@@ -32,7 +32,7 @@ class User(db.Model, UserMixin):
         self.email = email
         self.description = description  # описание пользователя по дефолту пустое, но в процессе работы на сайте можно добавить или редактировать
         self.is_admin = is_admin
-        self.last_login = datetime.datetime.now()
+        self.last_login = last_login
 
 
 @manager.user_loader

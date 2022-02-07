@@ -2,22 +2,20 @@ import json
 import os.path
 from pathlib import Path
 
-from werkzeug.security import generate_password_hash
-
-#
-from Flask_Project.app.db_models import User
-
 app_dir = Path(__file__).parent
 json_path = os.path.join(app_dir, 'seeds/data_db.json')
 
 
 class FillBase:
-    def __init__(self, db, u_data):
-        self.db = db
-        self.u_data = u_data
+    """ Класс заполнения таблицы пользователей """
 
-    def append(self):
-        process = self.db(
+    def __init__(self, database, u_data, session):
+        self.database = database
+        self.u_data = u_data
+        self.session = session
+
+    def create_user(self):
+        process = self.database(
             first_name=self.u_data['first_name'],
             last_name=self.u_data['last_name'],
             age=self.u_data['age'],
@@ -26,27 +24,7 @@ class FillBase:
             email=self.u_data['email'],
             is_admin=self.u_data['is_admin'],
             description=self.u_data['description'],
+            last_login=self.u_data['last_login'],
         )
-
-
-if __name__ == '__main__':
-
-    admin = {
-        'age': 100,
-        'nickname': 'admin',
-        'password': generate_password_hash('admin'),
-        'email': 'admin@gmail.com',
-        'is_admin': True,
-    }
-    create_user = FillBase(User, admin)
-    create_user.append()
-
-
-    def load_json_data():
-        with open(json_path, encoding='utf-8') as j_file:
-            return json.load(j_file)
-
-
-    for user_data in load_json_data():
-        create_user = FillBase(User, user_data)
-        create_user.append()
+        self.session.add(process)
+        self.session.commit()

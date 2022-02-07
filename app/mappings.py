@@ -3,35 +3,51 @@ import json
 import os.path
 from pathlib import Path
 
-from flask import Flask, render_template, url_for, request, flash, redirect, session, abort, g
+from flask import render_template, url_for, request, flash, redirect, session, abort, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from Flask_Project.app.app import app, db, migrate
+from Flask_Project.app.app import app, db
 from Flask_Project.app.db_models import User
 from Flask_Project.app.data_insertion import FillBase
+from Flask_Project.app.seeds.seed_database import create_fake_users
 
 app_dir = Path(__file__).parent
-json_path = os.path.join(app_dir, 'seeds/data_db.json')
+json_path = os.path.join(app_dir, 'seeds/data_db.json')  # путь к файлу json, для загрузки-выгрузки данных
+
+# db.session.query(User).delete()
+# db.session.commit()
 
 # -----------------------------------------------
 if not db.session.query(User).all():
     """ Автоматическое создание админ-странички для разработчика """
-    admin_data = {
+    print('База пустая')
+
+    admin_create = {
+        'first_name': 'admin',
+        'last_name': 'admin',
         'age': 100,
         'nickname': 'admin',
         'password': generate_password_hash('admin'),
         'email': 'admin@gmail.com',
         'is_admin': True,
+        'description': '',
+        'last_login': '2022-01-28 08:27:51'
     }
-    admin = FillBase(User, admin_data)
-    admin.append()
-    db.session.add(admin)
-    db.session.commit()
+    """ Передаем параметры для регистрации пользователя, сессию и таблицу базы данных """
+    admin = FillBase(User, admin_create, db.session).create_user()
 
     print(f'Created Superuser: nick: "admin", pass: "admin"')
 
-elif db.session.query(User).count():
+
+elif db.session.query(User).count() and db.session.query(User).count() < 100:
+    """ Если админ был создан - создается нужное количество пользователей 
+    и записывается в базу данных( пример работы с json файлами)"""
+
+    with open(json_path, 'w', encoding='utf-8') as file:
+        """ Создание пользователей """
+        file.write(json.dumps(create_fake_users(10), sort_keys=True, ensure_ascii=False))
+
 
     def load_json_data():
         with open(json_path, encoding='utf-8') as j_file:
@@ -39,11 +55,17 @@ elif db.session.query(User).count():
 
 
     for user_data in load_json_data():
-        create_user = FillBase(User, user_data)
-        create_user.append()
-        db.session.add(create_user)
+        try:
+            """ Так как никнейм должен быть уникальным - проверяем, если такой есть уже есть игнорируем добавление """
+            create_user = FillBase(User, user_data, db.session).create_user()
+        except Exception:
+            print(f'Dublicate nickname {user_data["nickname"]}')
+            pass
 
-    db.session.commit()
+    print(db.session.query(User).count())
+
+else:
+    print('database is full')
 
 
 # -----------------------------------------------
@@ -60,6 +82,7 @@ def login_page():
         password = request.form.get('password')
 
         if nickname and password:
+            """ Проверяем если форма не пустая проверяем есть ли пользователь с этими данными """
             user = db.session.query(User).filter(User.nickname == nickname).first()
 
             if user and check_password_hash(user.password, password):
@@ -208,7 +231,7 @@ def delete_user(user_id, control=None):
 
 
 @app.errorhandler(404)
-def page_not_found(error):
+def page_not_found(err):
     """ Обработка несуществующей страницы """
     return render_template('page_404.html', title='Page not found')
 

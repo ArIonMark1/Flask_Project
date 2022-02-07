@@ -6,7 +6,9 @@ CREATE DATABASE work_project; (create database work_project;)
 sudo -u username psql -- подключаемся к базе данных через нового пользователя
 psgl -d name_db -- выбираем нужную, уже созданую, базу данных
 
-\conninfo - проверяем данные о текущем подключении
+\conninfo -- проверяем данные о текущем подключении
+\l или \list -- вывести список всех баз данных
+SELECT datname FROM pg_database; -- или вывести список баз данных с помощью SQL команды
 
 ALTER USER username WITH PASSWORD 'pass'; -- устанавливаем пароль пользователю
 CREATE DATABASE work_project; (create database work_project;)

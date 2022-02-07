@@ -4,7 +4,6 @@ from pathlib import Path
 from flask import Flask
 from flask_migrate import Migrate
 from dotenv import load_dotenv
-from flask_seeder import FlaskSeeder
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -19,7 +18,7 @@ dialect:: postgresql+psycopg2
 """
 
 load_dotenv()
-env_path = Path(__file__).parents[1] / '.env'
+env_path = Path(__file__).parents[1] / '.env'  # путь к файлу .env
 load_dotenv(dotenv_path=env_path)
 
 app = Flask(__name__)
@@ -30,9 +29,6 @@ db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
 manager = LoginManager(app)
-
-seeder = FlaskSeeder()
-seeder.init_app(app, db)
 
 from Flask_Project.app import db_models
 
